@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+{% block content %}
+  {% if mode == "topper" %}
+    <h2>Subject-wise Topper</h2>
+    <form>
+      <input type="text" name="subject" placeholder="Subject" value="{{ subject or '' }}">
+      <button type="submit">Find</button>
+    </form>
+    {% if subject %}
+      {% if result %}
+        <p>Topper in <strong>{{ subject }}</strong>: {{ result[1] }} (Roll {{ result[0] }}) with {{ result[2] }}</p>
+      {% else %}
+        <p>No data for subject <strong>{{ subject }}</strong> yet.</p>
+      {% endif %}
+    {% endif %}
+  {% elif mode == "average" %}
+    <h2>Class Average</h2>
+    <form>
+      <input type="text" name="subject" placeholder="Subject" value="{{ subject or '' }}">
+      <button type="submit">Calculate</button>
+    </form>
+    {% if subject %}
+      {% if avg is not none %}
+        <p>Class average in <strong>{{ subject }}</strong>: {{ "%.2f"|format(avg) }}</p>
+      {% else %}
+        <p>No data for subject <strong>{{ subject }}</strong> yet.</p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% block content %}
+  <h2>Add/Update Grades for {{ student.name }} (Roll {{ student.roll_number }})</h2>
+  <form method="post" id="grades-form">
+    <div id="rows">
+      <div class="row">
+        <input type="text" name="subject" placeholder="Subject (e.g., Math)">
+        <input type="number" name="score" placeholder="Score (0-100)" step="0.01" min="0" max="100">
+      </div>
+    </div>
+    <button type="button" onclick="addRow()">+ Add another</button>
+    <button type="submit">Save Grades</button>
+  </form>
+  <script>
+    function addRow(){
+      const rows = document.getElementById('rows');
+      const div = document.createElement('div');
+      div.className = 'row';
+      div.innerHTML = '<input type="text" name="subject" placeholder="Subject"> ' +
+                      '<input type="number" name="score" placeholder="Score (0-100)" step="0.01" min="0" max="100">';
+      rows.appendChild(div);
+    }
+  </script>
+{% endblock %}

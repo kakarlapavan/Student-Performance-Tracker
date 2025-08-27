@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ student.name }} (Roll {{ student.roll_number }})</h2>
+  <p><strong>Average:</strong>
+    {% if student.average_grade() is not none %}
+      {{ "%.2f"|format(student.average_grade()) }}
+    {% else %}
+      N/A
+    {% endif %}
+  </p>
+  <h3>Grades</h3>
+  {% if student.grades %}
+    <ul>
+    {% for subj, score in student.grades.items() %}
+      <li>{{ subj }}: {{ score }}</li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No grades yet.</p>
+  {% endif %}
+  <p><a href="{{ url_for('add_grades', roll_number=student.roll_number) }}">Add/Update Grades</a></p>
+{% endblock %}
